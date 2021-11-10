@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
+
 const filePath = path.join(__dirname, 'out.txt');
 fs.writeFile(filePath,'',()=>{});
-console.log('Hey write your text');
+console.log('Hey, write your text');
 
 process.stdin.on('data', (data)=>{
   if(data.toString().split('\n')[0]==='exit'){
-    console.log('--Bye bye--');
     process.exit();
 
   }
@@ -20,4 +20,9 @@ process.stdin.on('data', (data)=>{
  
     console.log('--something else?--');
   });
+});
+
+process.on("exit", () => process.stdout.write('--Bye bye--'));
+process.on("SIGINT", () => {
+  process.exit();
 });
